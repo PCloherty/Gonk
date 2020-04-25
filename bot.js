@@ -29,7 +29,7 @@ client.on("message", async (message) => {
     console.log("fetch request done");
     
     if (!sets.length){
-        return message.channel.send(`Couldnt find anything with ${args}, please supply a valid Starwars set number`)
+        return message.channel.send(`Couldnt find anything on brickset with the set number: ${args}, please supply a valid brickset Starwars set number`)
     }
 
     const [answer] = sets;
