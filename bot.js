@@ -31,7 +31,7 @@ client.on("message", async (message) => {
     if (!sets.length){
         return message.channel.send(`Couldnt find anything on Brickset with the set number: '${args}'.
         
-        Please supply a valid Brickset Starwars set number.`)
+Please supply a valid Brickset Starwars set number.`)
     }
 
     const [answer] = sets;
