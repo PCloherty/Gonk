@@ -46,7 +46,23 @@ Please supply a valid Brickset Starwars set number.`)
     console.log("message ready");
     message.channel.send(embed);
     console.log("message sent");
+
+    const {apiKeyUsage} = await fetch(
+      `https://brickset.com/api/v3.asmx/getKeyUsageStats?apikey=${process.env.AP}`
+      ).then((response) => response.json());
+    console.log(apiKeyUsage[0].count)
+
+  } else if (command==="usage") {
+    const {apiKeyUsage} = await fetch(
+          `https://brickset.com/api/v3.asmx/getKeyUsageStats?apikey=${process.env.AP}`
+          ).then((response) => response.json());
+    
+      console.log(apiKeyUsage[0])  
+      return message.channel.send(
+        `So far today I have been queried ${apiKeyUsage[0].count} times`
+        )
   }
+
 });
 
 config({
