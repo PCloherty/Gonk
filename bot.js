@@ -41,7 +41,7 @@ Please supply a valid Brickset Starwars set number.`)
       .addFields(
         { name: "Set Name", value: answer.name },
         { name: "Released", value: answer.year},
-        { name: "Pieces", Value: answer.pieces}
+        { name: "Pieces", value: answer.pieces}
       )
       .setImage(answer.image.imageURL);
     console.log("message ready");
