@@ -1,69 +1,45 @@
-const { Client, MessageEmbed } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 const { config } = require("dotenv");
-const fetch = require("node-fetch");
+const fs = require("fs");
 
-const client = new Client();
+const client = new Client({
+  disableEveryone:true
+});
 const prefix = "!";
 
-client.once("ready", () => {
-  console.log("Ready!");
+client.commands = new Collection();
+const commandFiles = fs
+  .readdirSync("./commands")
+  .filter(file => file.endsWith(".js"));
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
+
+client.on("ready", () => {
+  console.log(`Gonk is online`);
+
+  client.user.setActivity({
+     name: "Gonk Strikes Back", type: "WATCHING" 
+  });
 });
 
-client.on("message", async (message) => {
+client.on("message", async(message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (command === "set") {
-    console.log(`${args}`);
-
-    if (!args.length) {
-      return message.channel.send("Please supply a search term!");
-    }
-    const { sets } = await fetch(
-      `https://brickset.com/api/v3.asmx/getSets?apikey=${process.env.AP}&userHash=&params={'setNumber':'${args}-1','theme':'star wars'}`
-      
-    ).then((response) => response.json());
+  if (!client.commands.has(command)) return;
+  
+  try {
+    client.commands.get(command).execute(message, args);
     
-    console.log("fetch request done");
-    
-    if (!sets.length){
-        return message.channel.send(`Couldnt find anything on Brickset with the set number: '${args}'.
-        
-Please supply a valid Brickset Starwars set number.`)
-    }
-
-    const [answer] = sets;
-    console.log("json turned into array");
-    const embed = new MessageEmbed()
-      .setTitle(answer.number)
-      .addFields(
-        { name: "Set Name", value: answer.name },
-        { name: "Released", value: answer.year},
-        { name: "Pieces", value: answer.pieces}
-      )
-      .setImage(answer.image.imageURL);
-    console.log("message ready");
-    message.channel.send(embed);
-    console.log("message sent");
-
-    const {apiKeyUsage} = await fetch(
-      `https://brickset.com/api/v3.asmx/getKeyUsageStats?apikey=${process.env.AP}`
-      ).then((response) => response.json());
-    console.log(apiKeyUsage[0].count)
-
-  } else if (command==="usage") {
-    const {apiKeyUsage} = await fetch(
-          `https://brickset.com/api/v3.asmx/getKeyUsageStats?apikey=${process.env.AP}`
-          ).then((response) => response.json());
-    
-      console.log(apiKeyUsage[0])  
-      return message.channel.send(
-        `So far today I have been queried ${apiKeyUsage[0].count} times`
-        )
+  } catch (error) {
+    console.error(error);
+    message.reply("There was an error, please dont send me to Jabbas palace");
   }
-
 });
 
 config({
