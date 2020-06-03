@@ -14,14 +14,17 @@ module.exports={
     const embeded = new Discord.MessageEmbed()
         .setTitle(info.number)
         .addFields(
-          { name: "Set Name", value: info.name },
-          { name: "Released", value: info.year },
-          { name: "Pieces", value: info.pieces }
+          { name: "Set Name", value: info.name, inline:true },
+          { name: "Pieces", value: info.pieces, inline:true},
+          {name:"Minifigure Count", value:info.minifigs,inline:true}
         );
         if(price !== undefined ){
           embeded.addFields(
-            { name:"Original RRP($)", value:price })
+            { name:"Original RRP(US)", value:`$${price}` ,inline:true})
         };
+        embeded.addFields(
+          { name: "Released", value: info.year,inline:true }
+        )
         embeded.setImage(info.image.imageURL);
 
 
