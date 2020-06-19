@@ -1,5 +1,5 @@
 
-const fetchUsage = require("./functions/fetchUsage.js")
+const fetchUsage = require("../functions/fetchUsage.js")
 
 module.exports ={ 
     name:"usage",
