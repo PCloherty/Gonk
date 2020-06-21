@@ -7,7 +7,7 @@ module.exports = {
   name: "MongoConnect",
   discription: "mongodb related functions like checking db or writing to db",
   execute(message, args) {
-    async function main(message, args) {
+     main = async (message, args) => {
       const url = process.env.mongourl;
       const client = new MongoClient(url, {
         useNewUrlParser: true,
@@ -24,7 +24,7 @@ module.exports = {
       }
     }
 
-    check= async(message, client, args)=> {
+    check = async (message, client, args) => {
       const result = await client
         .db("GonkDB")
         .collection("sets")
@@ -46,7 +46,7 @@ module.exports = {
       }
     }
 
-    write = async(client, info)=> {
+    write= async (client, info)=> {
         await client.db("GonkDB").collection("sets").insertOne(info);
         console.log(
           `Upload successful,added set number ${info.number}: ${info.name} to the database`

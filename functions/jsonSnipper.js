@@ -4,7 +4,7 @@ module.exports={
     discription:"trim the json response for only the info needed",
     execute(response){
 
-    async function snipped(response){
+    snipped = async (response) =>{
         const requestedInfo = ['number','name','year','theme','pieces','minifigs','image','LEGOCom']
         const snippedInfo = []
         if (response.length === 0){
