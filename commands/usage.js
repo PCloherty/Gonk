@@ -4,11 +4,11 @@ const fetchUsage = require("../functions/fetchUsage.js")
 module.exports ={ 
     name:"usage",
     discription:"request how many times the API key has been used",
-    execute(message){
+    execute(){
         const query= fetchUsage.execute()
         let request = async(a) =>{
             const res = await a;
-            message.channel.send(`So far today I have been used ${res} times today`)
+            console.log(`So far the api has been called ${res} times today`)
         }
         request(query)
 
