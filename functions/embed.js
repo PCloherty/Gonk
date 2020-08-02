@@ -8,7 +8,7 @@ module.exports={
         .setTitle(results.number)
         for (let index = 0; index < fields.length; index++) {
           const element = fields[index];
-          if(element[1] !== undefined || element[1] !== 0 ){
+          if(element[1] !== undefined && element[1] !== 0 ){
             embeded.addFields(
                 {name: element[0], value: element[1], inline:true}
               )
