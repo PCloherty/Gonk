@@ -3,7 +3,7 @@ module.exports={
     name:"embed",
     discription :"embed the responses to be send",
     execute(message,results){
-    const fields=[['Set Name',results.name],['Pieces',results.pieces],['Minifigs',results.minifigs],['Original RRP(US$)', results.LEGOCom.US.retailPrice],['Released',results.year]];
+    const fields=[['Set Name',results.name],['Theme',results.theme],['Pieces',results.pieces],['Minifigs',results.minifigs],['Original RRP(US$)', results.LEGOCom.US.retailPrice],['Released',results.year]];
     const embeded = new Discord.MessageEmbed()
         .setTitle(results.number)
         for (let index = 0; index < fields.length; index++) {
