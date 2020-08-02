@@ -1,6 +1,4 @@
 const Discord = require("discord.js");
-
-
 module.exports={
     name:"embed",
     discription :"embed the responses to be send",
@@ -10,20 +8,19 @@ module.exports={
         .setTitle(results.number)
         for (let index = 0; index < fields.length; index++) {
           const element = fields[index];
-          if(element[1] !== undefined){
-          embeded.addFields(
-              {name: element[0], value: element[1], inline:true}
-            )
-            continue
+          if(element[1] !== undefined || element[1] !== 0 ){
+            embeded.addFields(
+                {name: element[0], value: element[1], inline:true}
+              )
+            continue;
           } else {
-            continue
+            continue;
           };
         }
         embeded.setImage(results.image.imageURL);
-        
       //-----send the information in a message
-      console.log('Send embed')
-      console.log(`------------End Process------------`)
+      console.log('Send embed');
+      console.log(`------------End Process------------`);
       message.channel.send(embeded);
       
     }
