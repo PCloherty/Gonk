@@ -21,7 +21,7 @@ client.on("ready", () => {
   console.log(`Gonk is online`);
 
   client.user.setActivity({
-     name: "Gonk Strikes Back", type: "WATCHING" 
+     name: "Order 1000010", type: "WATCHING" 
   });
 });
 
