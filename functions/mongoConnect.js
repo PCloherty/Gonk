@@ -2,12 +2,15 @@ const { MongoClient } = require("mongodb");
 const setQuery = require("./fetchQuery.js");
 const embed = require("./embed.js");
 const queryFail = require('./queryfail.js');
+const defaultVersion= require("./defaultVersion")
 
 module.exports = {
   name: "MongoConnect",
   discription: "mongodb related functions like checking db or writing to db",
   execute(message, args) {
-     main = async (message, args) => {
+    let setNum = defaultVersion.execute(args)
+    
+     main = async (message, setNum) => {
       const url = process.env.mongourl;
       const client = new MongoClient(url, {
         useNewUrlParser: true,
@@ -16,7 +19,7 @@ module.exports = {
 
       try {
         await client.connect();
-        await check(message, client, args);
+        await check(message, client, setNum);
       } catch (e) {
         console.error(e);
       } finally {
@@ -24,24 +27,24 @@ module.exports = {
       }
     }
 
-    check = async (message, client, args) => {
+    check = async (message, client, setNum) => {
       const result = await client
         .db("GonkDB")
         .collection("sets")
-        .findOne({ number: `${args}` });
+        .findOne({ number: `${setNum}` });
       if (result) {
         
         console.log(`database check successful`);
         embed.execute(message, result);
       } else {
         console.log("database check failed, searching on api");
-        const res = await setQuery.execute(args); 
+        const res = await setQuery.execute(setNum); 
         if (res) {
             console.log(`Api check successful`)
             await write(client, res);
             await embed.execute(message, res);
           } else {
-            queryFail.execute(message,args)
+            queryFail.execute(message,setNum)
           }
       }
     }
@@ -52,6 +55,6 @@ module.exports = {
           `Upload successful,added set number ${info.number}: ${info.name} to the database`
         );
      }
-    main(message, args).catch(console.error);
+    main(message, setNum).catch(console.error);
   },
 };
