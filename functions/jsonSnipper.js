@@ -11,6 +11,7 @@ module.exports={
             return null
         } else {
             const resarr = Object.entries(response[0])
+            resarr[1][1] = `${resarr[1][1]}-${resarr[2][1]}`
             for (let i = 0; i < resarr.length; i++) {
                 for (let j = 0; j < requestedInfo.length; j++) {
                     if (resarr[i][0]!==requestedInfo[j]){
