@@ -5,7 +5,7 @@ module.exports = {
     fail=(message, args)=>{return message.channel
     .send(`Couldnt find anything on Brickset with the set number: '${args}'.
             
-Please supply a valid Brickset Starwars set number.`);
+Please supply a valid Brickset set number.`);
   }
   console.log(`Send failed query message`)
   console.log(`------------End Process------------`)
