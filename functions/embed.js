@@ -5,7 +5,9 @@ module.exports={
     execute(message,results){
     const fields=[['Set Name',results.name],['Theme',results.theme],['Pieces',results.pieces],['Minifigs',results.minifigs],['Original RRP(US$)', results.LEGOCom.US.retailPrice],['Released',results.year]];
     const embeded = new Discord.MessageEmbed()
+        .setColor('ff0000')
         .setTitle(results.number)
+        .setFooter("Bot Created by Poor Rick#5522, All information Provided by Brickset.")
         for (let index = 0; index < fields.length; index++) {
           const element = fields[index];
           if(element[1] !== undefined && element[1] !== 0 ){
