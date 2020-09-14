@@ -1,0 +1,44 @@
+user requests set number
+command executes
+    Does the set number match the required parameters?
+        if yes, continue
+        if no, send a message with the parameters laid out /end
+
+query Mongo database
+    Does the set exists in MongoDB? 
+        if yes, continue to embed
+        if no, execute fetch request
+
+fetch request data from API
+    Was the reponse successful && data != undefined?
+        if yes, upload data to MongoDB for future requests and continue to embed
+        if no, send a message to request a valid set number /end
+
+embed data into message 
+Send /end
+
+check data != undefined
+    if yes, post data
+    else no, ignore the embed
+
+getminifig collection query
+possible?
+
+json snipper
+when the json is recieved remove all but 
+sets:[
+    number
+    name
+    year
+    theme
+    pieces
+    minifigs
+    image:{
+        imageURL
+    }
+    LegoCom:{
+        US:{
+            retailPrice
+        }
+    }
+]
