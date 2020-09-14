@@ -9,8 +9,8 @@ It consumes the Bricklink API in order to show users in a server what the Lego i
 </p>
 
 <h3>How Gonk works</h3>
-<p>Gonk starts off monitoring messages in the server it is in waiting for command words at the beginning of a message in order activate. Once activated it the following <br/>
-  ![]/
+<p>Gonk starts off monitoring messages in the server it is in waiting for command words at the beginning of a message in order activate. Once activated it the following <br/></p>
+  ![dataflow of gonk](dataflow.PNG?raw=true)
 
 
 <h3>How is gonk used</h3>
