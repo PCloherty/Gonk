@@ -30,4 +30,4 @@ The bot will respond with the number of times the API has been queried.
 
 <h3>How Gonk works</h3>
 <p>Gonk starts off monitoring messages in the server it is in waiting for command words at the beginning of a message in order activate. Once activated it follows the below structure: <br/></p>
-  <img src="images/dataflow.PNG">
+  <img src="images/Gonk flowchart.png">
