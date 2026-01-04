@@ -1,11 +1,14 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, GatewayIntentBits, ActivityType } = require("discord.js");
 const { config } = require("dotenv");
+config();
 const fs = require("fs");
 
-const client = new Client({
-  disableEveryone:true
+const client = new Client({ intents: [
+  GatewayIntentBits.Guilds,
+  GatewayIntentBits.GuildMessages,
+  GatewayIntentBits.MessageContent]
 });
-const prefix = "!";
+const prefix = "/";
 
 client.commands = new Collection();
 const commandFiles = fs
@@ -21,11 +24,11 @@ client.on("ready", () => {
   console.log(`Gonk is online`);
 
   client.user.setActivity({
-     name: "Order 1000010", type: "WATCHING" 
+     name: "Order 1000010", type: ActivityType.Watching
   });
 });
 
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
