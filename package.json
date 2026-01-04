@@ -1,15 +1,14 @@
 {
   "name": "gonk",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "Index.js",
   "dependencies": {
-    "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0",
-    "mongodb": "^3.5.9",
-    "node-fetch": "^2.6.1"
+    "discord.js": "^14.25.1",
+    "dotenv": "^17.2.3",
+    "mongodb": "^7.0.0",
+    "node-fetch": "^2.7.0"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
